@@ -1,0 +1,138 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+// ── Users ─────────────────────────────────────────────────────────
+
+model Admin {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  notices   Notice[]
+}
+
+model Employee {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  phone     String?
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  clients            Client[]
+  activityLogs       ActivityLog[]
+  selectedCandidates Candidate[]   @relation("EmployeeSelectedCandidates")
+}
+
+model Candidate {
+  id             String   @id @default(uuid())
+  name           String
+  email          String   @unique
+  phone          String?
+  skills         String?  // Stored as JSON or comma-separated string for Phase 1
+  experience     String?  // In years, or "Fresher"
+  jobTitle       String?
+  noticePeriod   String?
+  linkedin       String?
+  portfolio      String?
+  education      String?
+  location       String?
+  resumeUrl      String?
+  photoUrl       String?
+  status         String   @default("Registered") // e.g. Registered, Screening, Contacted
+  joiningDate    DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  documents      CandidateDocument[]
+  activityLogs   ActivityLog[]
+  selectedById   String?
+  selectedBy     Employee?           @relation("EmployeeSelectedCandidates", fields: [selectedById], references: [id], onDelete: SetNull)
+}
+
+// ── Entities ──────────────────────────────────────────────────────
+
+model Client {
+  id                          String    @id @default(uuid())
+  name                        String
+  industry                    String?
+  contactName                 String?
+  email                       String?
+  phone                       String?
+  companyType                 String?
+  website                     String?
+  companyAddress              String?
+  state                       String?
+  city                        String?
+  recruitmentPositionRequired String?
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+
+  // Relations
+  employeeId                  String?
+  employee                    Employee? @relation(fields: [employeeId], references: [id])
+  activityLogs                ActivityLog[]
+}
+
+// ── Attachments & Logs ────────────────────────────────────────────
+
+model CandidateDocument {
+  id          String   @id @default(uuid())
+  name        String
+  fileUrl     String
+  documentType String  // Resume, Certificate, ID, etc.
+  uploadedAt  DateTime @default(now())
+
+  // Relations
+  candidateId String
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+}
+
+model ActivityLog {
+  id          String   @id @default(uuid())
+  action      String   // e.g. "Candidate Contacted", "Resume Downloaded"
+  details     String?
+  createdAt   DateTime @default(now())
+
+  // Relations
+  employeeId  String
+  employee    Employee @relation(fields: [employeeId], references: [id])
+  
+  candidateId String?
+  candidate   Candidate? @relation(fields: [candidateId], references: [id])
+
+  clientId    String?
+  client      Client?    @relation(fields: [clientId], references: [id])
+}
+
+// ── Communications ────────────────────────────────────────────────
+
+model Notice {
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  createdAt   DateTime @default(now())
+
+  // Relations
+  adminId     String
+  admin       Admin    @relation(fields: [adminId], references: [id])
+}
+

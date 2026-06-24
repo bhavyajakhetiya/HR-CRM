@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kreative Login - Eway HR CRM</title>
+<!-- Tailwind CSS v3 CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-layout">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #E2E2E2; /* Matching the neutral grey background from the reference */
+    }
+    .main-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .glass-card {
+      background: white;
+      border-radius: 3rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .image-container {
+      border-radius: 2.5rem;
+      overflow: hidden;
+    }
+  </style>
+<style data-purpose="form-styles">
+    /* Custom input styling to match the underline look in the reference */
+    .input-underlined {
+      border: none;
+      border-bottom: 1px solid #D1D5DB;
+      border-radius: 0;
+      padding-left: 0;
+      padding-right: 0;
+      background-color: transparent;
+    }
+    .input-underlined:focus {
+      outline: none;
+      border-bottom-color: #000;
+      box-shadow: none;
+      ring: 0;
+    }
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #6B7280;
+      margin-bottom: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+<main class="main-container">
+<!-- BEGIN: Top Navigation Pill -->
+<nav class="mb-12" data-purpose="url-bar">
+<div class="flex items-center space-x-2 bg-white/60 backdrop-blur-md px-4 py-2 rounded-full shadow-sm border border-white/40">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-blue-600 flex items-center justify-center">
+<svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path></svg>
+</div>
+<span class="text-sm font-medium text-gray-700">ewayhrcrm.com</span>
+</div>
+</nav>
+<!-- END: Top Navigation Pill -->
+<!-- BEGIN: Login Card -->
+<div class="glass-card flex flex-col md:flex-row p-6 md:p-8 gap-8">
+<!-- Left Column: Illustration -->
+<div class="hidden md:block w-1/2 image-container">
+<img alt="Abstract 3D Character Illustration" class="w-full h-full object-cover" data-purpose="hero-illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALRPdp9hkoo2dNuOHG4AHq3coOJms3uvOlwu-LBGLt15FKRs4jkrX4pioVmtuSIbu-QpaDL88gFk5DGOrx2lurZtqHWzIwDlRVc27VZBWyvkPcmOOg6wIug0FLaRZnlnc60vVfKJdysWmrXijDeTI1T9Bi7Jzai-FOpRrTlNhxsinnkicTTifKLyuYy8XemDglm4mOr2IFuxXXNZlj5R05z_0R8Mfg1l2xem5LVECEJNOyG-hjiHk8mjGY2JJlNmLMxYr9vqeWFM4"/>
+</div>
+<!-- Right Column: Form -->
+<div class="w-full md:w-1/2 flex flex-col justify-center px-4 py-6 md:px-12" data-purpose="login-form-container">
+<!-- Logo and Branding -->
+<div class="flex items-center justify-center space-x-2 mb-10" data-purpose="branding">
+<div class="bg-black p-1 rounded-md">
+<svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"></path>
+</svg>
+</div>
+<span class="font-bold text-xl tracking-tight">Kreative</span>
+</div>
+<!-- Heading -->
+<div class="text-center mb-10">
+<h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome Back!</h1>
+<p class="text-gray-400 text-sm">Enter Your Details Below</p>
+</div>
+<!-- Form Fields -->
+<form action="#" class="space-y-8" id="loginForm">
+<!-- Email Field -->
+<div class="flex flex-col">
+<label class="form-label" for="email">Email</label>
+<input class="input-underlined w-full py-2 text-gray-900" id="email" name="email" required="" type="email" value="hello.alex@gmail.com"/>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col relative">
+<label class="form-label" for="password">Password</label>
+<input class="input-underlined w-full py-2 text-gray-900 pr-10" id="password" name="password" required="" type="password" value="411"/>
+<!-- Toggle Visibility Icon -->
+<button class="absolute right-0 bottom-2 text-gray-400 hover:text-gray-600" data-purpose="password-toggle" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M15 12.a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Options -->
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<input checked="" class="h-4 w-4 text-black focus:ring-black border-gray-300 rounded" id="remember_me" name="remember_me" type="checkbox"/>
+<label class="ml-2 block text-xs font-medium text-gray-600" for="remember_me">
+                Remember me
+              </label>
+</div>
+<div class="text-xs">
+<a class="font-medium text-gray-300 hover:text-gray-500" href="#">Forgot password?</a>
+</div>
+</div>
+<!-- Actions -->
+<div class="space-y-4 pt-4">
+<button class="w-full flex justify-center py-4 px-4 border border-transparent rounded-full shadow-sm text-sm font-semibold text-white bg-black hover:bg-gray-800 transition-colors focus:outline-none" type="submit">
+              Log in
+            </button>
+<button class="w-full flex items-center justify-center py-4 px-4 border border-transparent rounded-full shadow-sm text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors focus:outline-none" type="button">
+<svg class="w-5 h-5 mr-2" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+              Log in with Google
+            </button>
+</div>
+</form>
+<!-- Footer Link -->
+<div class="mt-12 text-center text-xs">
+<p class="text-gray-400">
+            Don't have an account? 
+            <a class="text-black font-bold hover:underline" href="#">Sign Up</a>
+</p>
+</div>
+</div>
+</div>
+<!-- END: Login Card -->
+</main>
+<script data-purpose="event-handlers">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Logic for password toggle if needed
+      const toggleBtn = document.querySelector('[data-purpose="password-toggle"]');
+      const passwordInput = document.getElementById('password');
+      
+      toggleBtn.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+      });
+
+      // Simple form submission prevention for demo
+      document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('Login attempted');
+      });
+    });
+  </script>
+</body></html>
