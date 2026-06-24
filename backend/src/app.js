@@ -19,7 +19,8 @@ const app = express();
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || origin.startsWith('http://localhost:')) {
+    const allowedOrigin = process.env.FRONTEND_URL;
+    if (!origin || origin.startsWith('http://localhost:') || origin === allowedOrigin) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
