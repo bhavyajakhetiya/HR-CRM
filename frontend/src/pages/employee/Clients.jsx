@@ -243,7 +243,7 @@ export default function EmployeeClients() {
                   <p className="text-label-md text-outline font-semibold">Company Type</p>
                   <p className="text-body-md text-on-surface font-semibold mt-0.5">{selectedClient.companyType || 'N/A'}</p>
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div className="col-span-2">
                   <p className="text-label-md text-outline font-semibold">Website</p>
                   {selectedClient.website ? (
                     <a
