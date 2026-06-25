@@ -251,9 +251,9 @@ export default function EmployeeClients() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="text-body-md text-primary hover:underline font-semibold inline-flex items-center gap-1.5 mt-0.5"
+                      className="text-body-md text-primary hover:underline font-semibold inline-flex items-center gap-1.5 mt-0.5 break-all"
                     >
-                      <span className="material-symbols-outlined text-[16px]">public</span>
+                      <span className="material-symbols-outlined text-[16px] shrink-0">public</span>
                       {selectedClient.website}
                     </a>
                   ) : (
