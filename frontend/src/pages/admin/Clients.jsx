@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
+import { supabase } from '../../services/supabase';
 
 export default function AdminClients() {
   const [clients, setClients] = useState([]);
@@ -39,6 +40,21 @@ export default function AdminClients() {
   useEffect(() => {
     fetchClients();
     fetchEmployees();
+
+    const channel = supabase
+      .channel('admin-clients-changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'Client' },
+        (payload) => {
+          fetchClients();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const fetchClients = async () => {

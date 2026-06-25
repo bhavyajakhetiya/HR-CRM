@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import useAuthStore from '../../store/authStore';
+import { supabase } from '../../services/supabase';
 
 const STATUS_OPTIONS = [
   'Registered', 'Screening', 'Contacted', 'Interested',
@@ -49,7 +50,24 @@ export default function Candidates() {
   const [photoFile, setPhotoFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  useEffect(() => { fetchCandidates(); }, []);
+  useEffect(() => {
+    fetchCandidates();
+
+    const channel = supabase
+      .channel('candidates-changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'Candidate' },
+        (payload) => {
+          fetchCandidates();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   const fetchCandidates = async () => {
     try {
