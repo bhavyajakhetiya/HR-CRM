@@ -119,7 +119,7 @@ export default function AdminClients() {
   const handleOpenDuplicate = (client) => {
     setSelectedClient(null);
     setFormData({
-      name: client.name ? `${client.name} (Copy)` : '',
+      name: client.name ? `${client.name}` : '',
       industry: client.industry || '',
       contactName: client.contactName || '',
       email: client.email || '',
