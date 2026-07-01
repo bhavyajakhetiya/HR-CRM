@@ -116,6 +116,25 @@ export default function AdminClients() {
     setIsFormModalOpen(true);
   };
 
+  const handleOpenDuplicate = (client) => {
+    setSelectedClient(null);
+    setFormData({
+      name: client.name ? `${client.name} (Copy)` : '',
+      industry: client.industry || '',
+      contactName: client.contactName || '',
+      email: client.email || '',
+      phone: client.phone || '',
+      employeeId: client.employeeId || '',
+      companyType: client.companyType || '',
+      website: client.website || '',
+      companyAddress: client.companyAddress || '',
+      state: client.state || '',
+      city: client.city || '',
+      recruitmentPositionRequired: ''
+    });
+    setIsFormModalOpen(true);
+  };
+
   const handleOpenAssign = (client) => {
     setSelectedClient(client);
     setAssigneeId(client.employeeId || '');
@@ -367,6 +386,13 @@ export default function AdminClients() {
                     <td className="px-6 py-5 text-right">
                       <div className="flex items-center justify-end gap-1">
                         <button
+                          onClick={() => handleOpenDuplicate(client)}
+                          title="Duplicate Client"
+                          className="btn-icon hover:text-green-600"
+                        >
+                          <span className="material-symbols-outlined text-[20px]">content_copy</span>
+                        </button>
+                        <button
                           onClick={() => handleOpenAssign(client)}
                           title="Assign Recruiter"
                           className="btn-icon hover:text-primary"
@@ -463,9 +489,10 @@ export default function AdminClients() {
               </div>
 
               <div>
-                <label className="input-label">Recruitment Position Required</label>
+                <label className="input-label">Recruitment Position Required *</label>
                 <input
                   type="text"
+                  required
                   placeholder="e.g. Software Engineer, React Developer"
                   value={formData.recruitmentPositionRequired}
                   onChange={(e) => setFormData({ ...formData, recruitmentPositionRequired: e.target.value })}
